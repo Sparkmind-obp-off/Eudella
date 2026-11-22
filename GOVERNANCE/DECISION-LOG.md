@@ -12,6 +12,10 @@
 | Initial budget | Rp0 target | Constraint; verify costs before paid services |
 | Technical direction | Cloudflare-first, provider-agnostic | Proposed, not implemented |
 | AI autonomy | Risk-tiered, with explicit approval | Policy baseline |
+| Agentic workspace model | Human-centered collaborative workspace inspired by GenTeam mechanics | Foundational direction adopted; implementation pending |
+| Agent collaboration | Coordinator + bounded specialists, explicit tasks, one accountable assignee, structured handoffs | Foundational direction adopted; implementation pending |
+| Workspace context | Private by default; task-scoped context and least-privilege agent access | Non-negotiable design rule |
+| Multi-agent complexity | Use the smallest effective team; deterministic workflow or one agent when sufficient | MVP design rule |
 | Trademark status | Not certified | Open legal work |
 | Domain status | eudella.com in active use; alternatives unverified | Open work |
 
