@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUDELLA — Support for the life you're living</title>
+<meta name="description" content="EUDELLA membantu Anda memahami kebutuhan, menemukan pilihan, dan mengambil langkah berikutnya — dengan kendali tetap di tangan Anda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#F4F0E7;
+    --surface:#EAE4D7;
+    --ink:#252A28;
+    --muted:#575E59;
+    --line:#D8D0BE;
+    --forest:#173D35;
+    --deep:#102B26;
+    --bronze:#A8875B;
+    --bronze-ink:#7A5F3B;
+    --on-dark:#F4F0E7;
+    --on-dark-muted:#B7C5BE;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --body:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --step--1:clamp(.86rem,.83rem + .12vw,.94rem);
+    --step-0:clamp(1rem,.96rem + .3vw,1.125rem);
+    --step-1:clamp(1.3rem,1.15rem + .7vw,1.6rem);
+    --step-2:clamp(1.75rem,1.4rem + 1.5vw,2.6rem);
+    --step-3:clamp(2.5rem,1.7rem + 3.6vw,4.6rem);
+    --space:clamp(1.5rem,1rem + 2.4vw,3.25rem);
+    --section:clamp(4rem,3rem + 6vw,8rem);
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font:var(--step-0)/1.62 var(--body);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.02em;line-height:1.04;text-wrap:balance;margin:0}
+  h1{font-size:var(--step-3)}
+  h2{font-size:var(--step-2);letter-spacing:-.025em}
+  h3{font-size:var(--step-1);line-height:1.2;letter-spacing:-.01em}
+  p{margin:0;max-width:62ch;text-wrap:pretty}
+  a{color:var(--bronze-ink)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--bronze-ink);outline-offset:3px;border-radius:2px}
+  .wrap{width:min(1120px,100% - 2*var(--space));margin-inline:auto}
+
+  /* header */
+  header.site{border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:var(--space);padding-block:1.15rem}
+  .wordmark{font-family:var(--display);font-size:1.28rem;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
+  nav.primary{display:flex;gap:1.6rem;font-size:var(--step--1)}
+  nav.primary a{color:var(--muted);text-decoration:none;padding-block:.35rem}
+  nav.primary a:hover{color:var(--ink)}
+  @media (max-width:640px){nav.primary{display:none}}
+
+  /* hero */
+  .hero{padding-block:clamp(3.5rem,2rem + 8vw,7.5rem) var(--section);position:relative;overflow:hidden}
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--bronze) 0%,var(--line) 38%,transparent 100%);
+  }
+  .eyebrow{font-size:var(--step--1);letter-spacing:.14em;text-transform:uppercase;color:var(--bronze-ink)}
+  .hero h1{margin-top:1.6rem;max-width:24ch}
+  .hero .lede{margin-top:1.6rem;font-size:var(--step-1);line-height:1.45;color:var(--muted);max-width:46ch}
+  .hero .tagline{margin-top:2.4rem;font-family:var(--display);font-style:italic;font-size:var(--step-1);color:var(--forest)}
+
+  /* sequence */
+  section{padding-block:var(--section)}
+  .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--space) var(--section);align-items:start}
+  @media (max-width:820px){.section-head{grid-template-columns:1fr}}
+  .section-head p{color:var(--muted);margin-top:.9rem}
+  ol.steps{list-style:none;margin:clamp(2.5rem,2rem + 3vw,4.5rem) 0 0;padding:0;border-top:1px solid var(--line)}
+  ol.steps li{
+    display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:0 var(--space);
+    padding-block:1.8rem;border-bottom:1px solid var(--line);
+  }
+  @media (max-width:560px){ol.steps li{grid-template-columns:3rem minmax(0,1fr)}}
+  ol.steps .num{font-family:var(--display);font-size:var(--step-1);color:var(--bronze);font-variant-numeric:lining-nums;padding-top:.15rem}
+  ol.steps p{margin-top:.55rem;color:var(--muted);max-width:52ch}
+
+  /* control band */
+  .control{background:var(--deep);color:var(--on-dark);padding-block:0}
+  .control .inner{padding-block:clamp(4rem,3rem + 5vw,7rem)}
+  .control h2{max-width:18ch}
+  .control .promise{margin-top:1.4rem;font-size:var(--step-1);line-height:1.45;color:var(--on-dark-muted);max-width:42ch}
+  .control ul{list-style:none;margin:clamp(2.5rem,2rem + 3vw,4rem) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(244,240,231,.18)}
+  @media (max-width:760px){.control ul{grid-template-columns:1fr}}
+  .control li{background:var(--deep);padding:1.5rem 1.4rem 1.7rem}
+  .control li strong{display:block;font-family:var(--body);font-weight:600;font-size:var(--step-0);letter-spacing:0}
+  .control li span{display:block;margin-top:.5rem;color:var(--on-dark-muted);font-size:var(--step--1);line-height:1.55;max-width:34ch}
+
+  /* audiences */
+  .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--section) var(--section)}
+  @media (max-width:820px){.pair{grid-template-columns:1fr;gap:2.6rem}}
+  .pair article{border-top:1px solid var(--ink);padding-top:1.3rem}
+  .pair h3{margin-top:.4rem}
+  .pair p{margin-top:.8rem;color:var(--muted)}
+  .pair .note{margin-top:1.1rem;font-size:var(--step--1);color:var(--bronze-ink)}
+
+  /* footer */
+  footer.site{border-top:1px solid var(--line);padding-block:2.6rem 3rem;color:var(--muted);font-size:var(--step--1)}
+  footer .foot{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;align-items:baseline}
+  footer .wordmark{font-size:1rem}
+
+  .reveal{animation:rise .95s var(--ease) backwards;animation-delay:calc(var(--i,0) * 110ms)}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}}
+  @media (prefers-reduced-motion:reduce){.reveal{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="wordmark" href="#top">Eudella</a>
+    <nav class="primary" aria-label="Utama">
+      <a href="#prinsip">Lima prinsip</a>
+      <a href="#kendali">Kendali Anda</a>
+      <a href="#untuk-siapa">Untuk siapa</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow reveal" style="--i:0">Dukungan hidup, bukan pengawasan</p>
+      <h1 class="reveal" style="--i:1">Hidup tidak selalu rapi. Langkah berikutnya bisa lebih jelas.</h1>
+      <p class="lede reveal" style="--i:2">EUDELLA membantu Anda menyebutkan apa yang Anda butuhkan, memahami pilihan yang ada, lalu menyusun langkah kecil yang masuk akal — dengan keputusan tetap di tangan Anda.</p>
+      <p class="tagline reveal" style="--i:3">“Support for the life you’re living.”</p>
+    </div>
+  </section>
+
+  <section id="prinsip">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Lima prinsip yang mengatur cara kerjanya</h2>
+        <p>Bukan daftar fitur. Ini urutan kerja: memahami dulu, baru menemukan, menyusun, mengoordinasikan, dan belajar — masing-masing dengan izin Anda.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="num" aria-hidden="true">01</span>
+          <div>
+            <h3>Memahami</h3>
+            <p>Mendengar apa yang Anda katakan Anda butuhkan. Hanya bertanya yang relevan, dan jujur saat ada hal yang belum pasti.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">02</span>
+          <div>
+            <h3>Menemukan</h3>
+            <p>Menunjukkan informasi, layanan, orang, dan peluang yang berguna — beserta sumber, keterbatasan, dan risikonya.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">03</span>
+          <div>
+            <h3>Merencanakan</h3>
+            <p>Mengubah tujuan pilihan Anda menjadi opsi yang realistis dan langkah yang bisa diubah kapan saja.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">04</span>
+          <div>
+            <h3>Mengoordinasikan</h3>
+            <p>Menghubungkan alat dan layanan hanya dengan izin. Setiap tindakan ke luar terlihat dan menunggu persetujuan Anda.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num" aria-hidden="true">05</span>
+          <div>
+            <h3>Belajar dengan izin</h3>
+            <p>Konteks yang Anda izinkan dipakai untuk menjaga kesinambungan — dan Anda bisa memeriksa, memperbaiki, mengekspor, atau menghapusnya.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="control" id="kendali">
+    <div class="wrap inner">
+      <h2>Anda tetap yang memegang kendali.</h2>
+      <p class="promise">EUDELLA membantu membuat langkah berikutnya lebih jelas — bukan mengambil alih keputusan Anda.</p>
+      <ul>
+        <li>
+          <strong>Izin terlihat</strong>
+          <span>Setiap akses dijelaskan sebelum dipakai, bukan disembunyikan di menu.</span>
+        </li>
+        <li>
+          <strong>Persetujuan bisa dicabut</strong>
+          <span>Tindakan berisiko menunggu persetujuan, dan izin dapat ditarik kembali.</span>
+        </li>
+        <li>
+          <strong>Data milik Anda</strong>
+          <span>Informasi pribadi bisa diperiksa, diperbaiki, diekspor, dan dihapus.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="untuk-siapa">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Dua ruang, satu prinsip</h2>
+        <p>Untuk orang yang menjalani hidupnya, dan untuk organisasi yang ingin benar-benar berguna bagi mereka.</p>
+      </div>
+      <div class="pair" style="margin-top:clamp(2.5rem,2rem + 3vw,4rem)">
+        <article>
+          <p class="eyebrow">Pribadi</p>
+          <h3>Ruang untuk kebutuhan Anda sendiri</h3>
+          <p>Tempat menelaah kebutuhan, menata tujuan, mencari sumber daya, dan menyusun langkah dengan tempo Anda sendiri.</p>
+        </article>
+        <article>
+          <p class="eyebrow">Organisasi</p>
+          <h3>Dukungan yang tidak berubah jadi pengawasan</h3>
+          <p>Cara yang lebih runtut bagi organisasi untuk membuat dukungan dan sumber daya mudah ditemukan — tanpa menjadikan dukungan pribadi sebagai alat pemantauan.</p>
+          <p class="note">Sedang disiapkan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap foot">
+    <span class="wordmark">Eudella</span>
+    <span>eudella.biz.id · Versi pratinjau, 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
