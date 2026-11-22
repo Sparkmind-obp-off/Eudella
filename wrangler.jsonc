@@ -33,12 +33,12 @@
       // Worker always accepts its own origin, so the workers.dev URL needs no ALLOWED_ORIGINS entry.
       "name": "eudella-app",
       "workers_dev": true,
-      "routes": [{ "pattern": "eudella.biz.id", "custom_domain": true }],
+      "routes": [{ "pattern": "eudella.biz.id", "custom_domain": true }, { "pattern": "www.eudella.biz.id", "custom_domain": true }],
       "vars": {
         "APP_ENV": "production",
         "AI_ENABLED": "false",
         "SESSION_TTL_HOURS": "168",
-        "ALLOWED_ORIGINS": "https://eudella.biz.id"
+        "ALLOWED_ORIGINS": "https://eudella.biz.id,https://www.eudella.biz.id"
       },
       "d1_databases": [
         {
