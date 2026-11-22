@@ -1,7 +1,7 @@
 {
   // EUDELLA — single Cloudflare Worker serving the SPA (static assets) and /api/* (Hono).
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "eudella",
+  "name": "eudella-app",
   "main": "src/worker/index.ts",
   "compatibility_date": "2026-11-01",
   "compatibility_flags": ["nodejs_compat"],
@@ -15,8 +15,7 @@
     {
       "binding": "DB",
       "database_name": "eudella-db",
-      // Replace with the id printed by `wrangler d1 create eudella-db` before remote deploy.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "b79abba3-4dc4-49a6-be25-ce2438b1b38d",
       "migrations_dir": "migrations"
     }
   ],
@@ -29,19 +28,23 @@
   "observability": { "enabled": true },
   "env": {
     "production": {
-      "name": "eudella",
-      "routes": [{ "pattern": "eudella.biz.id", "custom_domain": true }],
+      // Owner decision 2026-11-22: the app takes over eudella.biz.id (detach it from the old
+      // Pages project "eudella" first, or the custom-domain attach will fail). workers.dev stays on; the
+      // Worker always accepts its own origin, so the workers.dev URL needs no ALLOWED_ORIGINS entry.
+      "name": "eudella-app",
+      "workers_dev": true,
+      "routes": [{ "pattern": "eudella.biz.id", "custom_domain": true }, { "pattern": "www.eudella.biz.id", "custom_domain": true }],
       "vars": {
         "APP_ENV": "production",
         "AI_ENABLED": "false",
         "SESSION_TTL_HOURS": "168",
-        "ALLOWED_ORIGINS": "https://eudella.biz.id"
+        "ALLOWED_ORIGINS": "https://eudella.biz.id,https://www.eudella.biz.id"
       },
       "d1_databases": [
         {
           "binding": "DB",
           "database_name": "eudella-db",
-          "database_id": "00000000-0000-0000-0000-000000000000",
+          "database_id": "b79abba3-4dc4-49a6-be25-ce2438b1b38d",
           "migrations_dir": "migrations"
         }
       ]

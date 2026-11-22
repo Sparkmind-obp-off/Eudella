@@ -1,0 +1,46 @@
+/* EUDELLA design tokens — palette is the locked brand palette; contrast pairs noted. */
+:root {
+  --forest: #173d35;        /* on ivory: 11.0:1 */
+  --deep-forest: #102b26;
+  --ivory: #f4f0e7;
+  --charcoal: #252a28;      /* on ivory: 13.2:1 */
+  --bronze: #a8875b;        /* decorative / large only (2.9:1 on ivory) */
+  --bronze-ink: #7a5f3a;    /* bronze for text on ivory: 5.0:1 */
+  --mist: #dce4de;
+  --white: #ffffff;
+
+  --ink: var(--charcoal);
+  --ink-muted: #4f5a55;     /* on ivory 6.6:1, on white 7.2:1 */
+  --ground: var(--ivory);
+  --surface: var(--white);
+  --surface-2: #ebe6da;
+  --line: #d6cfbf;
+  --line-strong: #b8b09e;
+  --primary: var(--forest);
+  --primary-hover: var(--deep-forest);
+  --on-primary: var(--ivory);
+  --focus: #8a6a3d;
+  --danger: #8f2d1f;        /* genuine safety/destructive only; 7.6:1 on ivory */
+  --danger-bg: #f6e3de;
+  --ok: #24563f;
+  --ok-bg: #dfeadf;
+  --warn-bg: #f3e8d2;
+  --warn-ink: #6b4d1d;
+
+  --display: "Source Serif 4", "Source Serif Pro", Georgia, "Times New Roman", serif;
+  --body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
+  --step-3: clamp(2.1rem, 1.6rem + 2.4vw, 3.6rem);
+  --step-4: clamp(2.6rem, 1.8rem + 3.8vw, 5rem);
+
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 18px; --r-pill: 999px;
+  --shadow-1: 0 1px 0 rgba(16, 43, 38, 0.06);
+  --shadow-dialog: 0 24px 60px rgba(16, 43, 38, 0.28);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --rail: 248px;
+}
