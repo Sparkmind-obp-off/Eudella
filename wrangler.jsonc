@@ -1,0 +1,50 @@
+{
+  // EUDELLA — single Cloudflare Worker serving the SPA (static assets) and /api/* (Hono).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "eudella",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "eudella-db",
+      // Replace with the id printed by `wrangler d1 create eudella-db` before remote deploy.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "APP_ENV": "development",
+    "AI_ENABLED": "false",
+    "SESSION_TTL_HOURS": "168",
+    "ALLOWED_ORIGINS": "http://127.0.0.1:8787,http://localhost:8787,http://127.0.0.1:5173,http://localhost:5173"
+  },
+  "observability": { "enabled": true },
+  "env": {
+    "production": {
+      "name": "eudella",
+      "routes": [{ "pattern": "eudella.biz.id", "custom_domain": true }],
+      "vars": {
+        "APP_ENV": "production",
+        "AI_ENABLED": "false",
+        "SESSION_TTL_HOURS": "168",
+        "ALLOWED_ORIGINS": "https://eudella.biz.id"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "eudella-db",
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
+}
