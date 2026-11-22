@@ -59,6 +59,7 @@ The platform must support human agency. It must never monitor, coerce, manipulat
 - [Product strategy](PRODUCT/PRODUCT-STRATEGY.md)
 - [ALSOS architecture](PRODUCT/ALSOS-ARCHITECTURE.md)
 - [Agent model and operating rules](PRODUCT/AGENT-MODEL-AND-OPERATING-RULES.md)
+- [Agentic Workspace Foundation](PRODUCT/AGENTIC-WORKSPACE-FOUNDATION.md)
 
 ### Governance and commercial
 - [Privacy, consent, and safety](GOVERNANCE/PRIVACY-AND-SAFETY.md)
