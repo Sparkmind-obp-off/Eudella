@@ -1,12 +1,14 @@
 # EUDELLA — Roadmap
 
-**Status:** Planning baseline; no application implementation is included in this documentation commit.
+**Status:** Planning baseline; agent-team operating specification is now documented, but no application/runtime implementation is included yet.
 
 ## Phase 0 — Foundation (current)
-- [x] Lock EUDELLA as internal commercial brand decision.
+- [x] Lock EUDELLA as internal brand decision.
 - [x] Define relationship between EUDELLA and ALSOS.
 - [x] Establish brand purpose, positioning, voice, visual direction.
 - [x] Draft product, architecture, privacy, commercial, and clearance documents.
+- [x] Define Agentic Workspace foundation and human-control model.
+- [x] Define ALSOS Agentic Super Team roster, task contract, handoff, permission, and evaluation rules.
 - [ ] Review and approve strategy statements.
 - [ ] Obtain professional trademark review and domain strategy.
 
@@ -22,14 +24,16 @@
 - [ ] Tenant and permission model.
 - [ ] Data inventory, retention, export, deletion.
 - [ ] API and database schema.
-- [ ] Agent policies and action approval protocol.
-- [ ] Test plan and acceptance criteria.
+- [ ] Agent runtime, task queue, and agent registry contracts.
+- [ ] Tool/connector gateway and action approval protocol.
+- [ ] Test plan, eval fixtures, and acceptance criteria.
 
 ## Phase 3 — Prototype
 - [ ] Build UI using synthetic data only.
-- [ ] Implement support intake and resource discovery mock.
-- [ ] Implement editable support plan.
-- [ ] Keep AI and external integrations disabled by default.
+- [ ] Implement one workspace, coordinator, and two specialist capabilities.
+- [ ] Implement task board, structured handoffs, and source-linked artifacts.
+- [ ] Implement approval preview with execution disabled.
+- [ ] Keep personal onboarding and external integrations disabled.
 - [ ] Verify preview/production isolation.
 
 ## Phase 4 — Private pilot readiness
@@ -41,11 +45,13 @@
 - [ ] Security and privacy review.
 - [ ] Pilot consent and support process.
 
-## Phase 5 — Pilot
-- [ ] Small invitation-only pilot.
-- [ ] Measure usefulness, trust, and user control.
-- [ ] Track failure modes and safety incidents.
-- [ ] Iterate from evidence.
+## Phase 5 — Controlled agent pilot
+- [ ] Connect a supported agent runtime after verifying access, cost, data handling, and cancellation controls.
+- [ ] Implement persistent task state, coordinator dispatch, and bounded specialist execution.
+- [ ] Implement task-scoped context and least-privilege connector gateway.
+- [ ] Run routing, handoff, prompt-injection, tenant-isolation, approval, retry, and cancellation evaluations.
+- [ ] Enable only synthetic-data or explicitly consented internal workflows at first.
+- [ ] Keep external side effects disabled until action approval and receipt reconciliation pass.
 
 ## Phase 6 — Commercial validation
 - [ ] Test pricing and willingness to pay.
@@ -54,4 +60,5 @@
 - [ ] Publish only substantiated claims.
 
 ## Release gates
+
 No public launch before privacy, security, legal, accessibility, operational, and support requirements pass. No paid service or billing activation without explicit approval.
