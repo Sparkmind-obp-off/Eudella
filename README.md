@@ -60,6 +60,8 @@ The platform must support human agency. It must never monitor, coerce, manipulat
 - [ALSOS architecture](PRODUCT/ALSOS-ARCHITECTURE.md)
 - [Agent model and operating rules](PRODUCT/AGENT-MODEL-AND-OPERATING-RULES.md)
 - [Agentic Workspace Foundation](PRODUCT/AGENTIC-WORKSPACE-FOUNDATION.md)
+- [ALSOS Agentic Super Team operating charter](PRODUCT/ALSOS-AGENTIC-SUPER-TEAM.md)
+- [Portable Agent Team Manifest](PRODUCT/ALSOS-AGENT-TEAM-MANIFEST.yaml)
 
 ### Governance and commercial
 - [Privacy, consent, and safety](GOVERNANCE/PRIVACY-AND-SAFETY.md)
@@ -71,9 +73,11 @@ The platform must support human agency. It must never monitor, coerce, manipulat
 - [Research foundations and sources](RESEARCH/FOUNDATIONS-AND-SOURCES.md)
 - [Brand clearance status](RESEARCH/BRAND-CLEARANCE-STATUS.md)
 
-## Repository status
+## Repository and runtime status
 
-This repository currently contains brand and product foundation documents plus a preliminary logo concept. It does **not** yet contain an implemented application, production database, agent runtime, legal registration, or deployment. Architecture and roadmap items are proposals until implemented and verified.
+The repository contains brand, product, governance, and agent-team specifications. The ALSOS Agentic Super Team now has a defined roster, mandates, task contract, handoff protocol, state machines, permission boundaries, and evaluation gates.
+
+**The live product runtime is not yet implemented.** No EUDELLA application, persistent task queue, agent registry, shared memory service, product connector gateway, or approval engine is deployed. The current ChatGPT-session connectors are not automatically integrated into EUDELLA. Agent Relay currently reports no live launch targets or registered live agents, and no Agent Swarm is linked. Do not describe the team as running in production.
 
 ## Legal and domain note
 
