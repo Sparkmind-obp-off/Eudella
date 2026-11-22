@@ -1,0 +1,184 @@
+version: "1.0"
+product: EUDELLA
+system: ALSOS
+team_name: "EUDELLA Agentic Super Team"
+status: "team_spec_ready_live_runtime_blocked"
+mission: "Support the person's stated goals while preserving human agency, privacy, and control."
+
+defaults:
+  orchestration: coordinator
+  team_size: smallest_effective
+  max_parallel_agents: 3
+  task_owner_count: 1
+  context_policy: least_privilege
+  memory_policy: task_scoped_by_default
+  external_actions: disabled_without_exact_human_approval
+  autonomous_high_impact_actions: prohibited
+  retrieved_content_trust: untrusted_data
+  require_provenance: true
+  require_acceptance_criteria: true
+
+agents:
+  - id: alsos-coordinator
+    name: "ALSOS Lead Coordinator"
+    type: coordinator
+    status: logical_role
+    mandate: "Route requests, create bounded tasks, assign one accountable owner, manage dependencies and handoffs, synthesize results, and stop safely."
+    allowed_actions: [classify_request, create_task, assign_task, delegate, collect_results, synthesize, report]
+    denied_actions: [grant_permissions, approve_own_external_action, make_high_impact_decision]
+    tools: [workspace_tasks, agent_dispatch]
+    context: [current_request, task_metadata, explicitly_shared_context]
+
+  - id: life-navigator
+    name: "Life Navigator"
+    type: specialist
+    status: logical_role
+    mandate: "Clarify the person's stated need and route to a useful workflow without prescribing goals."
+    allowed_actions: [clarify, summarize_need, recommend_workflow]
+    denied_actions: [infer_hidden_needs, set_user_goals, diagnose]
+    tools: [conversation_read]
+    context: [current_request, explicitly_shared_context]
+
+  - id: research-discovery
+    name: "Research & Discovery"
+    type: specialist
+    status: logical_role
+    mandate: "Find, compare, verify, and cite public or authorized information, resources, services, and opportunities."
+    allowed_actions: [search, fetch, extract, compare, cite, flag_uncertainty]
+    denied_actions: [publish, contact, purchase, submit, modify_external_system]
+    tools: [approved_search, approved_scrape, approved_browser_read]
+    context: [task_brief, authorized_sources]
+
+  - id: planning-partner
+    name: "Planning Partner"
+    type: specialist
+    status: logical_role
+    mandate: "Turn a user-selected goal into editable steps, milestones, and dependencies."
+    allowed_actions: [draft_plan, estimate_dependencies, identify_blockers]
+    denied_actions: [commit_user_to_plan, execute_external_action]
+    tools: [workspace_plan_read, workspace_plan_write]
+    context: [approved_task_context]
+
+  - id: opportunity-scout
+    name: "Opportunity Scout"
+    type: specialist
+    status: logical_role
+    mandate: "Explore education, work, community, and other opportunities the person explicitly asks to consider."
+    allowed_actions: [discover_opportunities, compare_requirements, cite_sources]
+    denied_actions: [apply, contact, submit, make_employment_decision]
+    tools: [approved_search, approved_retrieval]
+    context: [task_brief, authorized_sources]
+
+  - id: wellbeing-guide
+    name: "Wellbeing Guide"
+    type: specialist
+    status: logical_role
+    mandate: "Explain general non-clinical resources and routes to qualified support."
+    allowed_actions: [explain_general_resources, suggest_professional_routes]
+    denied_actions: [diagnose, prescribe, replace_emergency_or_clinical_care]
+    tools: [curated_resource_read]
+    context: [minimum_necessary_user_approved_context]
+
+  - id: action-coordinator
+    name: "Action Coordinator"
+    type: specialist
+    status: disabled_until_approval_gateway
+    mandate: "Prepare exact action previews and execute only after a matching, current, action-specific human approval."
+    allowed_actions: [prepare_preview, validate_approval, execute_approved_action, record_receipt]
+    denied_actions: [execute_without_approval, broaden_approved_scope, autonomous_high_impact_action]
+    tools: [scoped_action_gateway]
+    context: [action_request, exact_approval_record, minimum_required_payload]
+
+  - id: safety-guardian
+    name: "Safety & Policy Guardian"
+    type: reviewer
+    status: logical_role
+    mandate: "Review risk, privacy, authorization, prompt injection, sensitive-data boundaries, and prohibited actions."
+    allowed_actions: [policy_review, flag_risk, block_unsafe_transition, request_human_review]
+    denied_actions: [access_unrelated_private_history, grant_permissions, override_user_decision]
+    tools: [policy_engine, redacted_audit_metadata]
+    context: [task_metadata, policy, minimum_necessary_context]
+
+  - id: quality-reviewer
+    name: "Evidence & Quality Reviewer"
+    type: reviewer
+    status: active_first_wave
+    mandate: "Check completeness, evidence, source quality, uncertainty, contradictions, and acceptance criteria."
+    allowed_actions: [verify_citations, check_acceptance, flag_conflicts, request_bounded_revision]
+    denied_actions: [invent_evidence, silently_resolve_material_conflicts]
+    tools: [artifact_read, source_metadata_read]
+    context: [task_outputs, provenance, acceptance_criteria]
+
+task_contract:
+  required:
+    - task_id
+    - workspace_id
+    - tenant_id
+    - objective
+    - assignee_agent_id
+    - expected_output
+    - acceptance_criteria
+    - status
+    - risk_level
+    - permission_scope
+    - provenance
+    - handoff_history
+  status:
+    - draft
+    - ready
+    - running
+    - blocked
+    - review
+    - completed
+    - failed
+    - cancelled
+  terminal: [completed, failed, cancelled]
+  rule: "Exactly one accountable assignee per task; contributors do not own delivery."
+
+handoff_contract:
+  required:
+    - task_id
+    - next_owner
+    - objective
+    - completed_work
+    - findings
+    - source_references
+    - assumptions_and_uncertainties
+    - artifacts
+    - remaining_work
+    - acceptance_criteria
+    - permission_scope
+    - stop_condition
+  requires_receiver_acknowledgement: true
+  secrets_allowed: false
+
+approval_contract:
+  states: [prepared, awaiting_approval, approved, executing, succeeded, denied, expired, revoked, failed, cancelled]
+  binds:
+    - action_id
+    - user_id
+    - tenant_id
+    - destination
+    - parameters
+    - data_to_be_shared
+    - cost_or_consequence
+    - expires_at
+  invalidate_on_material_change: true
+  silence_means: denied
+  autonomous_high_impact_actions: prohibited
+
+runtime:
+  current_status: not_connected
+  relay_live_agents: 0
+  relay_launch_targets: 0
+  linked_agent_swarms: 0
+  required_components:
+    - agent_registry_and_versioning
+    - coordinator_runtime
+    - persistent_task_store_and_queue
+    - scoped_context_service
+    - tool_connector_gateway
+    - policy_and_authorization_engine
+    - approval_service
+    - audit_and_observability
+    - evaluation_runner
