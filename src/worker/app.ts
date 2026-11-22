@@ -16,7 +16,7 @@ export function createApp() {
   app.use("*", requestId, securityHeaders);
 
   app.get("/health", async (c) => {
-    let db = "unknown";
+    let db: "ok" | "error";
     let migrations: number | null = null;
     try {
       const r = await c.env.DB.prepare("SELECT COUNT(*) AS n FROM resources").first<{ n: number }>();
